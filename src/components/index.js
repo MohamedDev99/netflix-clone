@@ -1,1 +1,11 @@
 export { default as Jumbotron } from "./Jumbotron";
+export { default as Footer } from "./Footer";
+export { default as Accordion } from "./Accordion";
+export { default as OptForm } from "./OptForm";
+export { default as Header } from "./Header";
+export { default as Forms } from "./Forms";
+export { default as PopUpMessage } from "./PopUpMessage";
+export { default as ProRoute } from "./ProRoute";
+export { default as Row } from "./Row";
+export { default as Trailer } from "./Trailer";
+export { default as Loading } from "./Loading";
