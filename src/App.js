@@ -26,7 +26,7 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route exact path="/" element={<Home />} />
+                    <Route index path="/" element={<Home />} />
                     <Route
                         path="/home"
                         element={
@@ -43,8 +43,8 @@ function App() {
                             </ProRoute>
                         }
                     />
-                    <Route exact path="/signin" element={<SignIn />} />
-                    <Route exact path="/signup" element={<SignUp />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
                 </Routes>
             </Router>
             <Toaster position="bottom-right" reverseOrder={false} />

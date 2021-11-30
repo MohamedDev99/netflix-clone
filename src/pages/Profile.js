@@ -26,8 +26,8 @@ export default function Profile() {
     const signOutHandler = () => {
         signOut(auth)
             .then(() => {
-                navigate("/", { replace: true });
-                return toast.success("Success");
+                navigate("", { replace: true });
+                return toast.success("Success logOut");
             })
             .catch((error) => {
                 // An error happened.
@@ -78,7 +78,7 @@ export default function Profile() {
                                 scale: 0.85,
                             }}
                             onClick={signOutHandler}>
-                            Sign Out
+                            Log Out
                         </SignOut>
                     </UserDetails>
                 </ProfileDetails>

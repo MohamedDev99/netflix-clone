@@ -1,11 +1,14 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components/macro";
 
 function OptForm() {
+    const navigate = useNavigate();
+
     return (
         <MainOptForm>
             <Container>
                 <InputField type="text" placeholder="Email Address" />
-                <SubmitField>Try it now</SubmitField>
+                <SubmitField onClick={() => navigate("/signin")}>Try it now</SubmitField>
             </Container>
             <Text>Ready to watch ? enter your email to create or restart your membership</Text>
         </MainOptForm>
