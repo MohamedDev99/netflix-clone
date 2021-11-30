@@ -124,19 +124,19 @@ const NavBarRight = styled.div`
     justify-content: flex-end;
     width: 100%;
 `;
-const UserProfile = styled.div``;
-const UserPic = styled.img`
-    max-width: 42px;
-    width: 100%;
-    min-width: 22px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border 150ms ease-in-out;
-    &:hover {
-        border: 2px solid var(--body-bg);
-    }
-`;
+// const UserProfile = styled.div``;
+// const UserPic = styled.img`
+//     max-width: 42px;
+//     width: 100%;
+//     min-width: 22px;
+//     border-radius: 50%;
+//     cursor: pointer;
+//     border: 2px solid transparent;
+//     transition: border 150ms ease-in-out;
+//     &:hover {
+//         border: 2px solid var(--body-bg);
+//     }
+// `;
 const Logo = styled.img`
     max-width: 150px;
     width: 100%;

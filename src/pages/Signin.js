@@ -1,5 +1,5 @@
 import React from "react";
-import useContent from "../features/useContent";
+// import useContent from "../features/useContent";
 import { Footer, Forms } from "../components";
 import { HeaderContainer } from "../components/Header";
 

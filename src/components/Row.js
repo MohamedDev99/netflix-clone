@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { setMovieId } from "../features/useMovie";
+import { setMovie } from "../features/useMovie";
 import { Loading } from ".";
 
 export default function Row({ title, fetchDataUrl, isLargeRow, RTL }) {
@@ -77,7 +77,7 @@ export default function Row({ title, fetchDataUrl, isLargeRow, RTL }) {
         movies.map((movie, index) => (
             <ImagesSlider
                 key={index}
-                movieId={movie.id}
+                movie={movie}
                 image={`${imgBaseUrl}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
                 alt={movie.name}
                 title={movie?.title || movie?.name || movie?.original_name || "Joker"}
@@ -97,7 +97,7 @@ export default function Row({ title, fetchDataUrl, isLargeRow, RTL }) {
     );
 }
 
-function ImagesSlider({ movieId, image, alt, title, isLargeImg }) {
+function ImagesSlider({ movie, image, alt, title, isLargeImg }) {
     const dispatch = useDispatch();
 
     // ? function for resize descreption
@@ -106,7 +106,7 @@ function ImagesSlider({ movieId, image, alt, title, isLargeImg }) {
     };
 
     return (
-        <Wrap onClick={() => dispatch(setMovieId({ id: movieId }))}>
+        <Wrap onClick={() => dispatch(setMovie(movie))}>
             {image ? <RowImg src={image} alt={alt} isLargeRow={isLargeImg} /> : <Loading />}
             <RowTitle fs="clamp(0.7rem, 1vw, .9rem)" mb="0.7rem">
                 {cutDesc(title, 10)}

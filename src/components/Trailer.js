@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieId, setMovieId } from "../features/useMovie";
+import { getMovie, setMovie } from "../features/useMovie";
 import axiosInstance from "../APIs/axios";
 import toast from "react-hot-toast";
 import { Loading, PopUpMessage } from ".";
@@ -40,7 +40,8 @@ export default function Trailer() {
 
     // * get all details about a trailer
     const dispatch = useDispatch();
-    const getTrailer = useSelector(getMovieId);
+    const getTrailer = useSelector(getMovie);
+    const [selectTrailer, setSelectTrailer] = useState(null);
     const [hide, setHide] = useState(false);
     const onOpen = () => {
         setHide(true);
@@ -55,9 +56,11 @@ export default function Trailer() {
     useEffect(() => {
         console.log(getTrailer);
         if (getTrailer) {
-            callTrailer(getTrailer);
-            dispatch(setMovieId({ id: "" }));
+            setSelectTrailer(getTrailer);
+            callTrailer(getTrailer.id);
+            dispatch(setMovie(null));
         }
+        // eslint-disable-next-line
     }, [getTrailer]);
 
     return (
@@ -65,16 +68,23 @@ export default function Trailer() {
             {loading ? (
                 <Loading src="/images/users/1.png" />
             ) : (
-                <VideoTrailer>
-                    <iframe
-                        width="560"
-                        height="315"
-                        src={`https://www.youtube.com/embed/${trailerId}`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen></iframe>
-                </VideoTrailer>
+                <VideoDetails>
+                    <VideoTrailer>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src={`https://www.youtube.com/embed/${trailerId}`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen></iframe>
+                    </VideoTrailer>
+                    <VideoTitle>
+                        {selectTrailer?.title || selectTrailer?.name || selectTrailer?.original_name}
+                    </VideoTitle>
+                    <VideoDate>{selectTrailer?.release_date}</VideoDate>
+                    <VideoDescription>{selectTrailer?.overview}</VideoDescription>
+                </VideoDetails>
             )}
         </MainTrailer>
     );
@@ -91,7 +101,40 @@ const MainTrailer = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: scroll;
 `;
-
-const VideoTrailer = styled.div``;
+const VideoDetails = styled.div`
+    width: 70%;
+    max-width: 1100px;
+    margin: 0 auto;
+    color: var(--red-dark);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    letter-spacing: 0.12rem;
+    font-family: "Inconsolata";
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    @media (max-width: 600px) {
+        width: 90%;
+    }
+`;
+const VideoTitle = styled.h2``;
+const VideoDate = styled.h3`
+    margin-top: -0.5rem;
+`;
+const VideoTrailer = styled.div`
+    margin-top: 2rem;
+    width: 100%;
+    height: 400px;
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+`;
+const VideoDescription = styled.p`
+    font-family: "Roboto Mono";
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    line-height: 1.6;
+    color: var(--body-bg);
+`;

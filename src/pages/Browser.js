@@ -4,24 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components/macro";
 import { HeaderFeature } from "../components/Header";
-import useContent from "../features/useContent";
+// import useContent from "../features/useContent";
 import { getUser } from "../features/userSlice";
-import selectionFilter from "../utils/selectionFilter";
+// import selectionFilter from "../utils/selectionFilter";
 import axiosInstance from "../APIs/axios";
 import requests from "../APIs/Requests";
 import { Footer, Loading, Row, Trailer } from "../components";
-import { getMovieId, setMovieId } from "../features/useMovie";
+import { getMovie, setMovie } from "../features/useMovie";
 
 function Browser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     // * get state components { series, films }
     const [selection, setSelection] = useState(false);
-    const [movie, setMovie] = useState([]);
+    const [movieSelector, setMovieSelector] = useState([]);
 
     const getData = async function fetchData(baseUrl) {
         const request = await axiosInstance.get(baseUrl);
-        setMovie(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]);
+        setMovieSelector(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]);
     };
 
     // const getUrl = async function fetchData() {
@@ -59,7 +60,7 @@ function Browser() {
     return (
         <MainBrowser>
             <BrowserContainer>
-                <HeaderFeature Height="80vh" backgroundImg={movie?.backdrop_path}>
+                <HeaderFeature Height="80vh" backgroundImg={movieSelector?.backdrop_path}>
                     <NavBar>
                         <Link to="/">
                             <Logo src="/images/misc/logo.svg" alt="" />
@@ -108,18 +109,23 @@ function Browser() {
                             </UserProfile>
                         </NavBarRight>
                     </NavBar>
-                    {movie?.backdrop_path ? (
+                    {movieSelector?.backdrop_path ? (
                         <FeatureFrame>
                             <FeatureTitle>
-                                {movie?.title || movie?.name || movie?.original_name || "Joker"}
+                                {movieSelector?.title ||
+                                    movieSelector?.name ||
+                                    movieSelector?.original_name ||
+                                    "Joker"}
                             </FeatureTitle>
-                            <FeatureText>{movie?.overview && cutDesc(movie?.overview, 200)}</FeatureText>
+                            <FeatureText>
+                                {movieSelector?.overview && cutDesc(movieSelector?.overview, 200)}
+                            </FeatureText>
                             <FeatureButtons>
                                 <FeaturePlayBtn
                                     whileHover={{
                                         scale: 1.05,
                                     }}
-                                    onClick={() => dispatch(setMovieId({ id: movie.id }))}>
+                                    onClick={() => dispatch(setMovie(movieSelector))}>
                                     Play
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +190,7 @@ function Browser() {
                 )}
                 <Footer />
             </BrowserContainer>
-            <Trailer videoId={getMovieId} />
+            <Trailer videoId={getMovie} />
         </MainBrowser>
     );
 }
@@ -326,9 +332,9 @@ const Logo = styled.img`
     min-width: 80px;
 `;
 
-const ProfileInfo = styled.div``;
-const Title = styled.h1``;
-const List = styled.ul``;
-const Item = styled.li``;
-const Picture = styled.img``;
-const Name = styled.p``;
+// const ProfileInfo = styled.div``;
+// const Title = styled.h1``;
+// const List = styled.ul``;
+// const Item = styled.li``;
+// const Picture = styled.img``;
+// const Name = styled.p``;

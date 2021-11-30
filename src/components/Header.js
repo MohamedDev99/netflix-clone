@@ -81,6 +81,7 @@ const MainHeader = styled.div`
 `;
 
 const MainFeature = styled(MainHeader)`
+    position: relative;
     background: ${({ backgroundImg }) => `url("https://images.tmdb.org/t/p/original/${backgroundImg}")`} top
         center / cover no-repeat;
     height: ${({ Height }) => (Height ? Height : "100vh")};

@@ -11,16 +11,16 @@ import { auth } from "./firebase-config";
 function App() {
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     const unsubscribe = onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             return dispatch(userLogged({ isLogged: true }));
-    //         } else {
-    //             return dispatch(userState({ isLogged: false, name: null, email: null, profilePic: null }));
-    //         }
-    //     });
-    //     return unsubscribe;
-    // }, [dispatch]);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                return dispatch(userLogged({ isLogged: true }));
+            } else {
+                return dispatch(userState({ isLogged: false, name: null, email: null, profilePic: null }));
+            }
+        });
+        return unsubscribe;
+    }, [dispatch]);
 
     return (
         <>
