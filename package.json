@@ -2,6 +2,7 @@
     "name": "netflix-clone",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://reactt-netflix-clone.netlify.app",
     "dependencies": {
         "@reduxjs/toolkit": "^1.6.2",
         "axios": "^0.24.0",

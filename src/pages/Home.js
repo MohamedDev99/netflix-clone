@@ -17,5 +17,6 @@ export default Home;
 
 const Main = styled.main`
     overflow: scroll;
+    overflow-x: hidden;
     height: 100vh;
 `;

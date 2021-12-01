@@ -1,11 +1,12 @@
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import styled from "styled-components/macro";
 
-function OptForm() {
+function OptForm({ variants }) {
     const navigate = useNavigate();
 
     return (
-        <MainOptForm>
+        <MainOptForm variants={variants}>
             <Container>
                 <InputField type="text" placeholder="Email Address" />
                 <SubmitField onClick={() => navigate("/signin")}>Try it now</SubmitField>
@@ -17,7 +18,7 @@ function OptForm() {
 
 export default OptForm;
 
-const MainOptForm = styled.div`
+const MainOptForm = styled(motion.div)`
     width: 100%;
     display: flex;
     flex-direction: column;

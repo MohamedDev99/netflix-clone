@@ -5,7 +5,7 @@ import { ProRoute } from "./components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
-import { userLogged, userState } from "./features/userSlice";
+import { userState } from "./features/userSlice";
 import { auth } from "./firebase-config";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                return dispatch(userLogged({ isLogged: true }));
+                return "isLogged";
             } else {
                 return dispatch(userState({ isLogged: false, name: null, email: null, profilePic: null }));
             }

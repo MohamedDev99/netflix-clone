@@ -1,10 +1,28 @@
+import { motion } from "framer-motion";
 import styled from "styled-components/macro";
+
 export default function Jumbotron({ jumboData }) {
+    const jumbotron = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                delayChildren: 0.5,
+                staggerChildren: 0.5,
+            },
+        },
+    };
+
+    const ItemLeft = {
+        hidden: { opacity: 0, x: "70%" },
+        show: { x: 0, opacity: 1 },
+    };
+    const ItemRight = { hidden: { opacity: 0, x: "-70%" }, show: { x: 0, opacity: 1 } };
     return (
-        <MainJumbotron>
+        <MainJumbotron variants={jumbotron} initial="hidden" animate="show">
             {jumboData &&
-                jumboData.map((item) => (
-                    <Item key={item.id}>
+                jumboData.map((item, index) => (
+                    <Item variants={index % 2 === 0 ? ItemLeft : ItemRight} key={item.id}>
                         <Container direction={item.direction}>
                             <Position>
                                 <Title>{item.title}</Title>
@@ -21,7 +39,7 @@ export default function Jumbotron({ jumboData }) {
 }
 
 // * styled Item
-const Item = styled.div`
+const Item = styled(motion.div)`
     display: flex;
     border-bottom: 8px solid #222;
     color: white;
@@ -30,7 +48,7 @@ const Item = styled.div`
 `;
 
 // * styled Jumbotron
-const MainJumbotron = styled.div`
+const MainJumbotron = styled(motion.div)`
     @media (max-width: 1000px) {
         ${Item}:last-of-type h3 {
             margin-bottom: 1.8rem;
