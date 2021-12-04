@@ -54,7 +54,6 @@ export default function Trailer() {
     };
 
     useEffect(() => {
-        console.log(getTrailer);
         if (getTrailer) {
             setSelectTrailer(getTrailer);
             callTrailer(getTrailer.id);
@@ -66,7 +65,7 @@ export default function Trailer() {
     return (
         <MainTrailer onClick={handleHideVideo} display={hide ? "flex" : "none"}>
             {loading ? (
-                <Loading src="/images/users/1.png" />
+                <Loading />
             ) : (
                 <VideoDetails>
                     <VideoTrailer>

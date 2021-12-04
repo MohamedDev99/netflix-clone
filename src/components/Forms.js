@@ -141,14 +141,6 @@ export default function Forms({ signUpForm = false }) {
         })
             .then(() => {
                 console.log("its updated");
-                dispatch(
-                    userState({
-                        isLogged: true,
-                        name: user.displayName,
-                        email: user.email,
-                        profilePic: user.photoURL,
-                    })
-                );
                 toast.success("Successfully creating your account");
                 navigate("/signin");
             })
@@ -165,14 +157,6 @@ export default function Forms({ signUpForm = false }) {
         await signInWithPopup(auth, provider)
             .then((result) => {
                 console.log(result.user);
-                dispatch(
-                    userState({
-                        isLogged: true,
-                        name: result.user.displayName,
-                        email: result.user.email,
-                        profilePic: result.user.photoURL,
-                    })
-                );
                 toast.success("Successfully creating your account");
                 navigate("/home");
             })

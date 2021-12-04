@@ -102,7 +102,7 @@ export default Header;
 
 const MainHeader = styled.div`
     background: url("/images/misc/home-bg.jpg") top left / cover no-repeat;
-    height: 100vh;
+    height: 101vh;
     display: flex;
     flex-direction: column;
     align-content: center;

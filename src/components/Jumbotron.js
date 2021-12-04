@@ -1,38 +1,25 @@
 import { motion } from "framer-motion";
+import { Fade } from "react-awesome-reveal";
 import styled from "styled-components/macro";
 
 export default function Jumbotron({ jumboData }) {
-    const jumbotron = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                delayChildren: 0.5,
-                staggerChildren: 0.5,
-            },
-        },
-    };
-
-    const ItemLeft = {
-        hidden: { opacity: 0, x: "70%" },
-        show: { x: 0, opacity: 1 },
-    };
-    const ItemRight = { hidden: { opacity: 0, x: "-70%" }, show: { x: 0, opacity: 1 } };
     return (
-        <MainJumbotron variants={jumbotron} initial="hidden" animate="show">
+        <MainJumbotron>
             {jumboData &&
                 jumboData.map((item, index) => (
-                    <Item variants={index % 2 === 0 ? ItemLeft : ItemRight} key={item.id}>
-                        <Container direction={item.direction}>
-                            <Position>
-                                <Title>{item.title}</Title>
-                                <SubTitle>{item.subTitle}</SubTitle>
-                            </Position>
-                            <Position>
-                                <Image src={item.image} alt={item.alt} />
-                            </Position>
-                        </Container>
-                    </Item>
+                    <Fade key={index + item.id} direction={index % 2 === 0 ? "left" : "right"}>
+                        <Item key={item.id}>
+                            <Container direction={item.direction}>
+                                <Position>
+                                    <Title>{item.title}</Title>
+                                    <SubTitle>{item.subTitle}</SubTitle>
+                                </Position>
+                                <Position>
+                                    <Image src={item.image} alt={item.alt} />
+                                </Position>
+                            </Container>
+                        </Item>
+                    </Fade>
                 ))}
         </MainJumbotron>
     );
